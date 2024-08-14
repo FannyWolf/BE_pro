@@ -2,6 +2,8 @@ package de.ait.books.controller;
 
 import de.ait.books.entity.Book;
 import de.ait.books.service.BookService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +16,6 @@ public class BookController {
 
     private final BookService bookService;
 
-
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
@@ -25,10 +26,12 @@ public class BookController {
     }
 
     @PostMapping("/books")
-    public Book saveBook(@RequestBody Book book) throws Exception {
-        return bookService.saveBook(book);
+    public ResponseEntity<Book> saveBook(@RequestBody Book book) {
+        try {
+            Book savedBook = bookService.saveBook(book);
+            return ResponseEntity.ok(savedBook);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
-
-
-
 }

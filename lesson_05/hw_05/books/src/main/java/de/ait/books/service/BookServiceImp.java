@@ -10,14 +10,12 @@ import java.util.List;
 @Service
 public class BookServiceImp implements BookService {
 
-
     private final BookRepository bookRepository;
 
     @Autowired
     public BookServiceImp(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
 
     @Override
     public List<Book> findAllBooks() {

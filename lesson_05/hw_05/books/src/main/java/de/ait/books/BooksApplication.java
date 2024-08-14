@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 По примеру написанному на занятие, создайте слои приложения, и реализуйте:
 1) получение всех (книг) при get запросе на /books
 2) добавление книги по запросу post
-
  */
 
 
