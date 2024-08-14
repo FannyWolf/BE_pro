@@ -2,6 +2,7 @@ package de.ait.books.service;
 
 import de.ait.books.entity.Book;
 import de.ait.books.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class BookServiceImp implements BookService {
 
     private final BookRepository bookRepository;
 
+    @Autowired
     public BookServiceImp(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
