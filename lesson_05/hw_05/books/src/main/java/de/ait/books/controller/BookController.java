@@ -45,4 +45,9 @@ public class BookController {
                                    String author) {
         return bookService.findBooks(author);
     }
+
+    @DeleteMapping ("/books/{id}")
+    public void  deleteBook(@PathVariable Integer id) throws Exception {
+        bookService.deleteBook(id);
+    }
 }
