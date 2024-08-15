@@ -4,10 +4,7 @@ import de.ait.books.entity.Book;
 import de.ait.books.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,4 +31,15 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
+
+    @GetMapping("/books/{id}")
+    public Book getBookById(@PathVariable Integer id) {
+         return  bookService.findBookById(id);
+    }
+
+    @GetMapping("/books/{author}")
+    public Book getBookByAuthor(@PathVariable String author) {
+        return  bookService.findBookByAuthor(author);
+    }
+
 }

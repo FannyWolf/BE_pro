@@ -29,7 +29,20 @@ public class BookServiceImp implements BookService {
 
     @Override
     public Book findBookById(Integer id) {
-        return bookRepository.findById(id);
+        return findAllBooks()
+                .stream()
+                .filter(b->b.getId().equals(id))
+                .findAny()
+                .orElse(null);
+    }
+
+    @Override
+    public Book findBookByAuthor(String author) {
+        return findAllBooks()
+                .stream()
+                .filter(b -> b.getAuthor().equalsIgnoreCase(author))
+                .findAny()
+                .orElse(null);
     }
 
     @Override

@@ -12,6 +12,8 @@ public interface BookService {
 
     Book findBookById(Integer id);
 
+    Book findBookByAuthor(String author);
+
     Book updateBook(Integer id, Book book) throws Exception;
 
     void deleteBook(Integer id) throws Exception;
