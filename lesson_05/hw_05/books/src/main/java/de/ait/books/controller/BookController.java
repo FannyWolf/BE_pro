@@ -37,8 +37,12 @@ public class BookController {
          return  bookService.findBookById(id);
     }
 
-    @GetMapping("/books/")
-    public List<Book> getBooks(@RequestParam(name = "author", required = false, defaultValue = "")  String author) {
+    // GET /books
+    // GET /books?author=
+
+    @GetMapping("/books")
+    public List<Book> getBooks(@RequestParam(name = "author", required = false, defaultValue = "")
+                                   String author) {
         return bookService.findBooks(author);
     }
 }

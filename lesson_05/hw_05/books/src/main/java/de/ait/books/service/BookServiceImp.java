@@ -39,7 +39,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<Book> findBooks(String author) {
-        Predicate<Book> predicateByAuthor = (author.equals("")) ? b -> true : b -> b.getAuthor().equalsIgnoreCase(author);
+        Predicate<Book> predicateByAuthor = (author.equals("")) ? b -> true : b -> b.getAuthor().toLowerCase().contains(author.toLowerCase());
 
         return findAllBooks()
                 .stream()

@@ -11,7 +11,7 @@ public class BookRepositoryImp implements BookRepository {
 
     private List<Book> books = new ArrayList<>(List.of(
             new Book(456, "The Silent Forest", "Emily Harper", "978-3-16-148410-0", 101),
-            new Book(457, "Journey to the Stars", "Michael Connor", "978-1-59-327584-6", 102),
+            new Book(457, "Journey to the Stars", " Connor", "978-1-59-327584-6", 102),
             new Book(458, "Echoes of the Past", "Laura Jameson", "978-0-14-312774-1", 104),
             new Book(428, "The Lost Kingdom", "John Harrison", "978-0-06-265248-1", 107),
             new Book(498, "Whispers in the Wind", "Ava Morgan", "978-0-385-51346-4", 108),
