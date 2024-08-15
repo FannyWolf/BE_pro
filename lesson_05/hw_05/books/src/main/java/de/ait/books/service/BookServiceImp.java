@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class BookServiceImp implements BookService {
@@ -17,7 +18,7 @@ public class BookServiceImp implements BookService {
         this.bookRepository = bookRepository;
     }
 
-    @Override
+
     public List<Book> findAllBooks() {
         return bookRepository.findAll();
     }
@@ -37,13 +38,15 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public Book findBookByAuthor(String author) {
+    public List<Book> findBooks(String author) {
+        Predicate<Book> predicateByAuthor = (author.equals("")) ? b -> true : b -> b.getAuthor().equalsIgnoreCase(author);
+
         return findAllBooks()
                 .stream()
-                .filter(b -> b.getAuthor().equalsIgnoreCase(author))
-                .findAny()
-                .orElse(null);
+                .filter(predicateByAuthor)
+                .toList();
     }
+
 
     @Override
     public Book updateBook(Integer id, Book book) throws Exception {

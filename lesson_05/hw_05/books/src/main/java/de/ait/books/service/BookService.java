@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface BookService {
 
-    List<Book> findAllBooks();
+   // List<Book> findAllBooks();
 
     Book saveBook(Book book) throws Exception;
 
     Book findBookById(Integer id);
 
-    Book findBookByAuthor(String author);
+    List<Book> findBooks(String author);
 
     Book updateBook(Integer id, Book book) throws Exception;
 

@@ -17,10 +17,10 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/books")
+    /* @GetMapping("/books")
     public List<Book> getAllBooks() {
         return bookService.findAllBooks();
-    }
+    } */
 
     @PostMapping("/books")
     public ResponseEntity<Book> saveBook(@RequestBody Book book) {
@@ -37,9 +37,8 @@ public class BookController {
          return  bookService.findBookById(id);
     }
 
-    @GetMapping("/books/{author}")
-    public Book getBookByAuthor(@PathVariable String author) {
-        return  bookService.findBookByAuthor(author);
+    @GetMapping("/books/")
+    public List<Book> getBooks(@RequestParam(name = "author", required = false, defaultValue = "")  String author) {
+        return bookService.findBooks(author);
     }
-
 }
