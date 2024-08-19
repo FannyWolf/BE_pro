@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="product_service" />
+        <module name="jdbc" />
+        <module name="hw_07" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="untitled" target="17" />
+      <module name="code_jdbc" target="17" />
+      <module name="jdbc_demo" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
