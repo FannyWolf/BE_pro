@@ -26,17 +26,13 @@ public class BookController {
     } */
 
     @PostMapping("/books")
-    public ResponseEntity<Book> saveBook(@RequestBody BookRequestDto bookDto) {
-        try {
-            Book savedBook = bookService.saveBook(bookDto);
-            return ResponseEntity.ok(savedBook);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
+    public BookResponseDto saveBook(@RequestBody BookRequestDto bookDto) {
+            BookResponseDto savedBook = bookService.saveBook(bookDto);
+            return savedBook;
     }
 
     @GetMapping("/books/{id}")
-    public Book getBookById(@PathVariable Integer id) {
+    public BookResponseDto getBookById(@PathVariable Integer id) {
          return  bookService.findBookById(id);
     }
 
@@ -48,18 +44,16 @@ public class BookController {
                                     required = false, defaultValue = "")
                                     String author) {
         return bookService.findBooks(author);
-        //return bookService.findBooks(author);
     }
 
     @DeleteMapping ("/books/{id}")
-    public void  deleteBook(@PathVariable Integer id) throws Exception {
+    public void  deleteBook(@PathVariable Integer id) {
         bookService.deleteBook(id);
     }
 
     @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable(name = "id") Integer id,
-                           @PathVariable(name = "readerId") Integer readerId,
-                           @RequestBody BookRequestDto bookRequestDto) throws Exception {
-        return bookService.updateBook(id, bookRequestDto, readerId);
+    public BookResponseDto updateBook(@PathVariable(name = "id") Integer id,
+                           @RequestBody BookRequestDto bookRequestDto) {
+        return bookService.updateBook(id, bookRequestDto);
     }
 }

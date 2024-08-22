@@ -8,11 +8,11 @@ public interface BookRepository {
 
    List<Book> findAll();
 
-   Book save(Book book) throws Exception;
+   Book save(Book book);
 
    Book findById(int id);
 
-   void delete(Integer id) throws Exception;
+   void delete(Integer id);
 
 
 }

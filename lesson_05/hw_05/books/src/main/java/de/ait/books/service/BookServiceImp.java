@@ -4,6 +4,7 @@ import de.ait.books.dto.BookRequestDto;
 import de.ait.books.dto.BookResponseDto;
 import de.ait.books.entity.Book;
 import de.ait.books.repository.BookRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,12 @@ import java.util.function.Predicate;
 public class BookServiceImp implements BookService {
 
     private final BookRepository bookRepository;
-    private final ModelMapper ;
+    private final ModelMapper mapper;
 
     @Autowired
-    public BookServiceImp(BookRepository bookRepository) {
+    public BookServiceImp(BookRepository bookRepository, ModelMapper mapper) {
         this.bookRepository = bookRepository;
+        this.mapper = mapper;
     }
 
 
@@ -27,14 +29,14 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public Book saveBook(BookRequestDto bookDto) throws Exception {
+    public BookResponseDto saveBook(BookRequestDto bookDto) {
         Book book = bookRepository.save(mapper.map(bookDto, Book.class));
-        return mapper.map((bookDto, Book.class));
+        return mapper.map(book, BookResponseDto.class);
     }
 
 
     @Override
-    public Book findBookById(Integer id) {
+    public BookResponseDto findBookById(Integer id) {
         return findAllBooks()
                 .stream()
                 .filter(b->b.getId().equals(id))
@@ -44,7 +46,8 @@ public class BookServiceImp implements BookService {
 
     @Override
     public List<BookResponseDto> findBooks(String author) {
-        Predicate<Book> predicateByAuthor = (author.equals("")) ? b -> true : b -> b.getAuthor().toLowerCase().contains(author.toLowerCase());
+        Predicate<Book> predicateByAuthor = (author.equals("")) ?
+                                            b -> true : b -> b.getAuthor().toLowerCase().contains(author.toLowerCase());
 
         List<Book> bookList = bookRepository.findAll()
                 .stream()
@@ -54,28 +57,55 @@ public class BookServiceImp implements BookService {
     }
 
 
+//    @Override
+//    public BookResponseDto updateBook(Integer id, BookRequestDto bookDto) {
+//        Book existingBook = bookRepository.findById(id);
+//        if (existingBook != null) {
+//            existingBook.setTitle(bookDto.getTitle());
+//            existingBook.setAuthor(bookDto.getAuthor());
+//            existingBook.setIsbn(bookDto.getIsbn());
+//            existingBook.setReaderId(bookDto.getReaderId());
+//
+//            Book book_1 = bookRepository.save(existingBook);
+//
+//            return mapper.map(book_1, BookResponseDto.class);
+//        } else {
+//            throw new RuntimeException("Book with ID " + id + " not found.");
+//        }
+//    }
+
     @Override
-    public Book updateBook(Integer id, BookRequestDto bookDto, Integer readerId) throws Exception {
+    public BookResponseDto updateBook(Integer id, BookRequestDto bookDto) {
         Book existingBook = bookRepository.findById(id);
+
         if (existingBook != null) {
+
             existingBook.setTitle(bookDto.getTitle());
             existingBook.setAuthor(bookDto.getAuthor());
             existingBook.setIsbn(bookDto.getIsbn());
-            existingBook.setReaderId(readerId);
+            existingBook.setReaderId(bookDto.getReaderId());
 
-            return bookRepository.save(existingBook);
+            Book updatedBook = bookRepository.save(existingBook);
+
+            return mapper.map(updatedBook, BookResponseDto.class);
         } else {
-            throw new Exception("Book with ID " + id + " not found.");
+            Book newBook = mapper.map(bookDto, Book.class);
+            newBook.setId(id);
+
+            Book savedBook = bookRepository.save(newBook);
+
+            return mapper.map(savedBook, BookResponseDto.class);
         }
     }
 
+
     @Override
-    public void deleteBook(Integer id) throws Exception {
+    public void deleteBook(Integer id){
         Book existingBook = bookRepository.findById(id);
         if (existingBook != null) {
             bookRepository.delete(existingBook.getId());
         } else {
-            throw new Exception("Book with ID " + id + " not found.");
+            throw new RuntimeException("Book with ID " + id + " not found.");
         }
     }
 }

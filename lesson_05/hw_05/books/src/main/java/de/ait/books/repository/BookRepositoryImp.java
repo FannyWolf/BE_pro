@@ -1,5 +1,7 @@
 package de.ait.books.repository;
 
+import de.ait.books.dto.BookRequestDto;
+import de.ait.books.dto.BookResponseDto;
 import de.ait.books.entity.Book;
 import org.springframework.stereotype.Repository;
 
@@ -25,16 +27,27 @@ public class BookRepositoryImp implements BookRepository {
     }
 
     @Override
-    public Book save(Book book) throws Exception {
-        // Проверяем существует ли книга с таким ID
-        for (Book existingBook : books) {
-            if (existingBook.getId().equals(book.getId())) {
-                throw new Exception("Book with ID " + book.getId() + " already exists.");
+    public Book save(Book book){
+        for (int i = 0; i < books.size(); i++){
+            Book existingBook = books.get(i);
+            if(existingBook.getId().equals(book.getId())){
+                books.set(i, book);
+                return book;
             }
         }
         books.add(book);
         return book;
     }
+
+//    public Book save(Book book){
+//        for (Book existingBook : books) {
+//            if (existingBook.getId().equals(book.getId())) {
+               // //throw new RuntimeException("Book with ID " + book.getId() + " already exists.");
+//            }
+//        }
+//        books.add(book);
+//        return book;
+//    }
 
     @Override
     public Book findById(int id) {
@@ -47,12 +60,14 @@ public class BookRepositoryImp implements BookRepository {
     }
 
     @Override
-    public void delete(Integer id) throws Exception {
+    public void delete(Integer id) {
         Book book = findById(id);
         if (book != null) {
             books.remove(book);
         } else {
-            throw new Exception("Book with ID " + id + " not found.");
+            throw new RuntimeException ("Book with ID " + id + " not found.");
         }
     }
+
+
 }

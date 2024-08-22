@@ -7,11 +7,17 @@ public class BookRequestDto {
     private String title;
     private String author;
     private String isbn;
+    private Integer readerId;
 
-    public BookRequestDto(String title, String author, String isbn) {
+    public BookRequestDto(String title, String author, String isbn, Integer readerId) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        this.readerId = readerId;
+    }
+
+    public Integer getReaderId() {
+        return readerId;
     }
 
     public BookRequestDto() {
