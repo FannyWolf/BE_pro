@@ -1,5 +1,7 @@
 package de.ait.books.service;
 
+import de.ait.books.dto.BookRequestDto;
+import de.ait.books.dto.BookResponseDto;
 import de.ait.books.entity.Book;
 import de.ait.books.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import java.util.function.Predicate;
 public class BookServiceImp implements BookService {
 
     private final BookRepository bookRepository;
+    private final ModelMapper ;
 
     @Autowired
     public BookServiceImp(BookRepository bookRepository) {
@@ -19,14 +22,16 @@ public class BookServiceImp implements BookService {
     }
 
 
-    public List<Book> findAllBooks() {
-        return bookRepository.findAll();
+    public List<BookResponseDto> findAllBooks() {
+        return BookResponseDto.of(bookRepository.findAll());
     }
 
     @Override
-    public Book saveBook(Book book) throws Exception {
-        return bookRepository.save(book);
+    public Book saveBook(BookRequestDto bookDto) throws Exception {
+        Book book = bookRepository.save(mapper.map(bookDto, Book.class));
+        return mapper.map((bookDto, Book.class));
     }
+
 
     @Override
     public Book findBookById(Integer id) {
@@ -38,24 +43,25 @@ public class BookServiceImp implements BookService {
     }
 
     @Override
-    public List<Book> findBooks(String author) {
+    public List<BookResponseDto> findBooks(String author) {
         Predicate<Book> predicateByAuthor = (author.equals("")) ? b -> true : b -> b.getAuthor().toLowerCase().contains(author.toLowerCase());
 
-        return findAllBooks()
+        List<Book> bookList = bookRepository.findAll()
                 .stream()
                 .filter(predicateByAuthor)
                 .toList();
+        return BookResponseDto.of(bookList);
     }
 
 
     @Override
-    public Book updateBook(Integer id, Book book) throws Exception {
+    public Book updateBook(Integer id, BookRequestDto bookDto, Integer readerId) throws Exception {
         Book existingBook = bookRepository.findById(id);
         if (existingBook != null) {
-            existingBook.setTitle(book.getTitle());
-            existingBook.setAuthor(book.getAuthor());
-            existingBook.setIsbn(book.getIsbn());
-            existingBook.setReaderId(book.getReaderId());
+            existingBook.setTitle(bookDto.getTitle());
+            existingBook.setAuthor(bookDto.getAuthor());
+            existingBook.setIsbn(bookDto.getIsbn());
+            existingBook.setReaderId(readerId);
 
             return bookRepository.save(existingBook);
         } else {
