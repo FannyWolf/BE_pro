@@ -33,7 +33,7 @@ public class ProductController {
     public List<ProductResponseDto> getProductsByLanguage(
             @RequestParam(name = "language") String language,
             @RequestParam(name = "translate_language") String translate_language) {
-        return service.findByLanguageAndTranslate_language(language, translate_language);
+        return service.findByLanguageAndTranslateLanguage(language, translate_language);
     }
 
     @GetMapping("/products/word")

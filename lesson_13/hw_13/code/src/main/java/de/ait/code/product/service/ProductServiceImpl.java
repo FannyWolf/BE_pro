@@ -42,8 +42,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponseDto> findByLanguageAndTranslate_language(String language, String translate_language) {
-        return repository.findByLanguageAndTranslateLanguage(language, translate_language).stream()
+    public List<ProductResponseDto> findByLanguageAndTranslateLanguage(String language, String translateLanguage) {
+        return repository.findByLanguageAndTranslateLanguage(language, translateLanguage).stream()
                 .map(e -> mapper.map(e, ProductResponseDto.class))
                 .toList();
     }

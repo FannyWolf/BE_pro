@@ -29,8 +29,8 @@ public class Product {
     @Column (name = "example")
     private String example;
 
-    @Column (name = "translate_language")
-    private String translate_language;
+    @Column (name = "translateLanguage")
+    private String translateLanguage;
 
     @Column (name = "translation")
     private String translation;

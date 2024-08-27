@@ -16,7 +16,7 @@ public class ProductResponseDto {
     String language;
     String word;
     String example;
-    String translate_language;
+    String translateLanguage;
     String translation;
     String card_group;
 }

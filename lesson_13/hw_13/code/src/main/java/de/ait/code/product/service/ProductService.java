@@ -10,6 +10,6 @@ public interface ProductService {
     List<ProductResponseDto> findAll();
     ProductResponseDto save(ProductRequestDto dto);
     ProductResponseDto findById(Long id);
-    List<ProductResponseDto> findByLanguageAndTranslate_language(String language, String translate_language);
+    List<ProductResponseDto> findByLanguageAndTranslateLanguage(String language, String translateLanguage);
     List<ProductResponseDto> findByWord(String word);
 }
