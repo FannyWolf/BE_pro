@@ -1,4 +1,4 @@
-package de.ait.code.product.entity;
+package de.ait.words.wordsCard.entity;
 
 
 import jakarta.persistence.*;
@@ -12,8 +12,8 @@ import lombok.*;
 @Builder
 
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "words")
+public class Word {
 
     @Id
     @GeneratedValue

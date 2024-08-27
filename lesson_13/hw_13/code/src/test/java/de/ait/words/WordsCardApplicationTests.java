@@ -1,10 +1,10 @@
-package de.ait.code;
+package de.ait.words;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CodeApplicationTests {
+class WordsCardApplicationTests {
 
     @Test
     void contextLoads() {

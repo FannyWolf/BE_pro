@@ -1,4 +1,4 @@
-package de.ait.code.configuration;
+package de.ait.words.configuration;
 
 
 import org.modelmapper.ModelMapper;

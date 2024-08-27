@@ -1,4 +1,4 @@
-package de.ait.code.product.dto;
+package de.ait.words.wordsCard.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -10,13 +10,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProductResponseDto {
+public class WordsRequestDto {
 
-    String id;
     String language;
     String word;
     String example;
     String translateLanguage;
     String translation;
     String card_group;
+
 }
