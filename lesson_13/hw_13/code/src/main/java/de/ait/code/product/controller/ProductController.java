@@ -29,4 +29,16 @@ public class ProductController {
         return service.save(dto);
     }
 
+    @GetMapping("/products/language")
+    public List<ProductResponseDto> getProductsByLanguage(
+            @RequestParam(name = "language") String language,
+            @RequestParam(name = "translate_language") String translate_language) {
+        return service.findByLanguageAndTranslate_language(language, translate_language);
+    }
+
+    @GetMapping("/products/word")
+    public List<ProductResponseDto> getProductByWord(@RequestParam(name = "word") String word) {
+        return service.findByWord(word);
+    }
+
 }

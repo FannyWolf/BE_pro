@@ -41,5 +41,18 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
+    @Override
+    public List<ProductResponseDto> findByLanguageAndTranslate_language(String language, String translate_language) {
+        return repository.findByLanguageAndTranslateLanguage(language, translate_language).stream()
+                .map(e -> mapper.map(e, ProductResponseDto.class))
+                .toList();
+    }
+
+    @Override
+    public List<ProductResponseDto> findByWord(String word) {
+        return repository.findByWord(word).stream()
+                .map(e -> mapper.map(e, ProductResponseDto.class))
+                .toList();
+    }
 
 }
