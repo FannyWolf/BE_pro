@@ -1,10 +1,11 @@
 package de.ait.words.wordsCard.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,11 +13,11 @@ import lombok.Setter;
 @Setter
 public class WordsRequestDto {
 
-    String language;
-    String word;
-    String example;
-    String translateLanguage;
-    String translation;
-    String card_group;
-
+    private String language;
+    private String word;
+    private String example;
+    private String translateLanguage;
+    private String translation;
+    private Set<Long> groupIds;
 }
+

@@ -32,8 +32,8 @@ public class WordsController {
     @GetMapping("/words/language")
     public List<WordsResponseDto> getWordsByLanguage(
             @RequestParam(name = "language") String language,
-            @RequestParam(name = "translate_language") String translate_language) {
-        return service.findByLanguageAndTranslateLanguage(language, translate_language);
+            @RequestParam(name = "translate_language") String translateLanguage) {
+        return service.findByLanguageAndTranslateLanguage(language, translateLanguage);
     }
 
     @GetMapping("/words/word")
