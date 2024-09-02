@@ -35,18 +35,12 @@ public class WordsGroup {
     public void addWord(Word word) {
         if (word != null) {
             words.add(word);
-            if (word.getGroups() != null) {
-                word.getGroups().add(this);
-            }
         }
     }
 
     public void removeWord(Word word) {
         if (word != null) {
             words.remove(word);
-            if (word.getGroups() != null) {
-                word.getGroups().remove(this);
-            }
         }
     }
 }

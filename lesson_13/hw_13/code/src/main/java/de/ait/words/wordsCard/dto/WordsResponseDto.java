@@ -1,5 +1,6 @@
 package de.ait.words.wordsCard.dto;
 
+import de.ait.words.wordsGroup.entity.WordsGroup;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,6 @@ public class WordsResponseDto {
     private String example;
     private String translateLanguage;
     private String translation;
-    private Set<String> groupNames;
+    //private Set<WordsGroup> groups;
 }
 

@@ -36,7 +36,7 @@ public class Word {
     @Column(name = "translation")
     private String translation;
 
-    @ManyToMany(mappedBy = "words")
-    private Set<WordsGroup> groups = new HashSet<>();
+   // @ManyToMany(mappedBy = "words")
+    // private Set<WordsGroup> groups = new HashSet<>();
 }
 
